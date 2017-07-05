@@ -11,7 +11,7 @@
 <script src="MapController.js"></script>
 </head>
 
-<body ng-app="ngMap">
+<body ng-app="myApp">
 <div id="upbg"></div>
 <div id="outer">
 <div id="header">
@@ -39,12 +39,13 @@
 				<!-- Normal content area end -->
 			</div>
 		</div>
-
+		
+	<div ng-controller="MyCtrl as vm">
 		<!-- Primary content: Stuff that goes in the primary content column (by default, the left column) -->
 		<div id="primarycontainer">
-		<div ng-controller="MyCtrl as vm">
 			<div id="primarycontent">
 			<!-- Show the map -->
+				
 					<ng-map class="bigmap" default-style="true" zoom="6" center="61.816667, 24.133333">
 					<marker id='{{trail.id}}' position="{{trail.position}}" icon="{{vm.image}}" shape="{{vm.shape}}"
 						ng-repeat="trail in vm.trails"
@@ -59,31 +60,39 @@
 						</div>
 					</info-window>
 					</ng-map>
-					<!-- Show the description -->
-
-				</div>
-			<div id="secondarycontent">
-				<div ng-show="vm.trailVisible" id="traildescription">
-						<h1>{{vm.trail.name}}</h1>
-						<br>
-						<div ng-repeat="item in vm.trailDescription">
-							<div class="post">
-								<h4>{{item.topic}}</h4>
-									<div class="contentarea">
-										<img src="{{item.img}}" class="left" alt="{{item.topic}}" />	
-										<p>{{item.description}}</p>
-									</div>
-							</div>
-							<div class="divider2"></div>
-
-						</div>
-						
-					</div>
+					<div class="divider1"></div>
+					
+				
 			</div>
-			</div>
-		
 		</div>
+		<!-- Secondary content: Stuff that goes in the secondary content column (by default, the narrower right column) -->
+		<div id="secondarycontent">
+			<!-- Secondary content area start -->
+			
+			<div class="divider2"></div>
+			<!-- Show the description -->
+
+			<div ng-show="vm.trailVisible" id="traildescription">
+				<h1>{{vm.trail.name}}</h1>
+				<br>
+				<div ng-repeat="item in vm.trailDescription">
+					<div class="post">
+						<h4>{{item.topic}}</h4>
+							<div class="contentarea">
+								<img src="{{item.img}}" class="left" alt="{{item.topic}}" />	
+								<p>{{item.description}}</p>
+							</div>
+					</div>
+					<div class="divider2"></div>
+				</div>
+						
+			</div>
+			<div class="divider2"></div>
 		
+		<!-- Secondary content area end -->
+		</div>
+	</div>
+	
 </div>		
 	<div id="footer">
 			<div class="left">&copy; 2011 Retkellä.fi. All rights reserved.</div>
