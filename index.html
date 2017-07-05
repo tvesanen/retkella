@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<title>Retkellä</title>
+<link rel="stylesheet" type="text/css" href="default.css" />
+<script src="https://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places"></script>
+<script src="https://code.angularjs.org/1.3.15/angular.js"></script>
+<script src="https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/scripts/ng-map.js"></script>
+<script src="MapController.js"></script>
+</head>
+
+<body ng-app="ngMap">
+<div id="upbg"></div>
+<div id="outer">
+<div id="header">
+		<div id="headercontent">
+			<h1>Retkellä lähellä ja kaukana</h1>
+		</div>
+	</div>
+
+	<div id="menu">
+		<!-- HINT: Set the class of any menu link below to "active" to make it appear active -->
+		<ul>
+			<li><a href="#" class="active">Koti</a></li>
+			<li><a href="#">Blogi</a></li>
+			<li><a href="#">Galleria</a></li>
+			<li><a href="#">Tietoja</a></li>
+			<li><a href="#">Ota yhteyttä</a></li>
+		</ul>
+	</div>
+	<div id="menubottom"></div>
+<div id="content">
+		<!-- Normal content: Stuff that's not going to be put in the left or right column. -->
+		<div id="normalcontent">
+			<div class="contentarea">
+				<!-- Normal content area start -->
+				<!-- Normal content area end -->
+			</div>
+		</div>
+
+		<!-- Primary content: Stuff that goes in the primary content column (by default, the left column) -->
+		<div id="primarycontainer">
+		<div ng-controller="MyCtrl as vm">
+			<div id="primarycontent">
+			<!-- Show the map -->
+					<ng-map class="bigmap" default-style="true" zoom="6" center="61.816667, 24.133333">
+					<marker id='{{trail.id}}' position="{{trail.position}}" icon="{{vm.image}}" shape="{{vm.shape}}"
+						ng-repeat="trail in vm.trails"
+						on-click="vm.showDetail(trail)">
+					</marker>
+
+					<info-window id="foo-iw">
+						<div ng-non-bindable="">
+							<h4>
+								<a href="#" ng-click="vm.clicked()">{{vm.trail.name}}</a>
+							</h4>
+						</div>
+					</info-window>
+					</ng-map>
+					<!-- Show the description -->
+
+				</div>
+			<div id="secondarycontent">
+				<div ng-show="vm.trailVisible" id="traildescription">
+						<h1>{{vm.trail.name}}</h1>
+						<br>
+						<div ng-repeat="item in vm.trailDescription">
+							<div class="post">
+								<h4>{{item.topic}}</h4>
+									<div class="contentarea">
+										<img src="{{item.img}}" class="left" alt="{{item.topic}}" />	
+										<p>{{item.description}}</p>
+									</div>
+							</div>
+							<div class="divider2"></div>
+
+						</div>
+						
+					</div>
+			</div>
+			</div>
+		
+		</div>
+		
+</div>		
+	<div id="footer">
+			<div class="left">&copy; 2011 Retkellä.fi. All rights reserved.</div>
+			<div class="right">Design by <a href="http://www.nodethirtythree.com/">NodeThirtyThree Design</a></div>
+	</div>
+
+</body>
+</html>
