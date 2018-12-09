@@ -1,2 +1,2 @@
 # retkella
-Web site for sharing trekking experiences
+Web site for sharing trekking experiences, implemented with javascript
